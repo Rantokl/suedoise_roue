@@ -17,5 +17,18 @@
             <p class="response">Message reçu : <strong>{{ message }}</strong></p>
         {% endif %}
     </div>
+    <div class="sliders">
+        <div class="slider-container">
+            <h3>Gauche / Droite</h3>
+            <input type="range" min="0" max="100" value="50" class="slider" id="slider-x">
+            <label>Valeur : <span id="value-x">50</span></label>
+        </div>
+    
+        <div class="slider-container">
+            <h3>Haut / Bas</h3>
+            <input type="range" min="0" max="100" value="50" class="slider vertical" id="slider-y" orient="vertical">
+            <label>Valeur : <span id="value-y">50</span></label>
+        </div>
+    </div>
 </body>
 </html>

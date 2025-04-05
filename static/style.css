@@ -36,3 +36,30 @@ button {
     font-size: 1.2em;
     color: #333;
 }
+
+.sliders {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.slider-container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.slider {
+    width: 200px;
+    margin: 10px 0;
+}
+
+.slider.vertical {
+    writing-mode: bt-lr; /* rend vertical */
+    -webkit-appearance: slider-vertical;
+    height: 200px;
+    width: 30px;
+}
