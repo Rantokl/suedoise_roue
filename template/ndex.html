@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Interface Web Raspberry Pi</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script defer src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Envoyer un message au Raspberry Pi</h1>
+        <form method="POST" id="messageForm">
+            <input type="text" name="message" id="messageInput" placeholder="Ton message..." required>
+            <button type="submit">Envoyer</button>
+        </form>
+        {% if message %}
+            <p class="response">Message reçu : <strong>{{ message }}</strong></p>
+        {% endif %}
+    </div>
+</body>
+</html>
