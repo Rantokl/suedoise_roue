@@ -63,3 +63,28 @@ button {
     height: 200px;
     width: 30px;
 }
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
+.panel {
+    border: 2px solid #444;
+    height: 300px;
+    width: 100px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #f0f0f0;
+    padding: 10px;
+}
+
+.panel div {
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+}

@@ -47,6 +47,22 @@ sliderY.addEventListener('input', async (e) => {
     const data = { axis: 'y', value: sliderY.value };
     await sendData('/send', data);  // On envoie un objet, pas juste la valeur
 });
+
+async function fetchDistances() {
+    try {
+        const response = await fetch('/distances');
+        const data = await response.json();
+        document.getElementById('left').textContent = `Gauche: ${data.Gauche} cm`;
+        document.getElementById('right').textContent = `Droite: ${data.Droite} cm`;
+        document.getElementById('back').textContent = `Arrière: ${data.Arrière} cm`;
+    } catch (err) {
+        console.error("Erreur de récupération :", err);
+    }
+}
+
+// Rafraîchit toutes les 1 sec
+setInterval(fetchDistances, 1000);
+
 });
 
 

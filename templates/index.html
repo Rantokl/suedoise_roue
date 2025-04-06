@@ -7,16 +7,15 @@
     <script defer src="{{ url_for('static', filename='script.js') }}"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Envoyer un message au Raspberry Pi</h1>
-        <form method="POST" id="messageForm">
-            <input type="text" name="message" id="messageInput" placeholder="Ton message..." required>
-            <button type="submit">Envoyer</button>
-        </form>
-        {% if message %}
-            <p class="response">Message reçu : <strong>{{ message }}</strong></p>
-        {% endif %}
+
+    <div class="container"></div>
+        <div class="panel">
+            <div id="left">Gauche: 0 cm</div>
+            <div id="back">Arrière: 0 cm</div>
+            <div id="right">Droite: 0 cm</div>
+        </div>
     </div>
+    
     <div class="sliders">
         <div class="slider-container">
             <h3>Gauche / Droite</h3>
@@ -30,5 +29,16 @@
             <label>Valeur : <span id="value-y">50</span></label>
         </div>
     </div>
+    <div class="container"></div>
+        <h1>Envoyer un message au Raspberry Pi</h1>
+        <form method="POST" id="messageForm">
+            <input type="text" name="message" id="messageInput" placeholder="Ton message..." required>
+            <button type="submit">Envoyer</button>
+        </form>
+        {% if message %}
+            <p class="response">Message reçu : <strong>{{ message }}</strong></p>
+        {% endif %}
+    </div>
+    
 </body>
 </html>
