@@ -33,11 +33,11 @@ def receive_message():
     value = int(message.get('value'))
     print(f"Message reçu depuis AJAX : {message}")
     if axis == 'x':
-            motors.set_motor(1,value,'forward')
-            motors.set_motor(2,value,'forward')
+        motors.set_motor(1,value,'forward')
+        motors.set_motor(2,value,'backward')
     elif axis == 'y':
         motors.set_motor(1,value,'backward')
-        motors.set_motor(1,value,'backward') 
+        motors.set_motor(2,value,'forward') 
 
     return jsonify({"status": "ok", "message": message})
 
@@ -46,6 +46,7 @@ def receive_message():
 
 if __name__ == '__main__':
     try:
+        motors.motors_set()
         thread = threading.Thread(target=update_distances)
         #thread = threading.Thread(target=run_motors, args=(axis,value))
         thread.daemon = True
