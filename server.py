@@ -15,14 +15,7 @@ def update_distances():
         distances = sensors.get_all_distances()
         time.sleep(1)
 
-def run_motors():
-    while True:
-        if axis == 'x':
-            motors.set_motor(1,value,'forward')
-            motors.set_motor(2,value,'forward')
-        elif axis == 'y':
-            motors.set_motor(1,value,'backward')
-            motors.set_motor(1,value,'backward')
+
 
 @app.route('/')
 def index():
@@ -43,7 +36,14 @@ def receive_message():
 
     return jsonify({"status": "ok", "message": message})
 
-    
+def run_motors():
+    while True:
+        if axis == 'x':
+            motors.set_motor(1,value,'forward')
+            motors.set_motor(2,value,'forward')
+        elif axis == 'y':
+            motors.set_motor(1,value,'backward')
+            motors.set_motor(1,value,'backward')  
 
 if __name__ == '__main__':
     try:
