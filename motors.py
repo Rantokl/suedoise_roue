@@ -11,7 +11,7 @@ DIR_PINS = [  # 2 broches direction par moteur
 ]
 
 def motors_set():
-      # en Hz
+    FREQUENCY = 2000  # en Hz
 
     # Initialisation GPIO
     GPIO.setmode(GPIO.BCM)
