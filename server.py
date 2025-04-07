@@ -33,11 +33,11 @@ def receive_message():
     value = int(message.get('value'))
     print(f"Message reçu depuis AJAX : {message}")
     if axis == 'x':
-        motors.set_motor(1,value,'forward')
-        motors.set_motor(2,value,'backward')
-    elif axis == 'y':
+        motors.set_motor(0,value,'forward')
         motors.set_motor(1,value,'backward')
-        motors.set_motor(2,value,'forward') 
+    elif axis == 'y':
+        motors.set_motor(0,value,'backward')
+        motors.set_motor(1,value,'forward') 
 
     return jsonify({"status": "ok", "message": message})
 
