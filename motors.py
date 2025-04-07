@@ -37,9 +37,17 @@ def set_motor(motor_index, speed, direction):
     speed: 0 à 100 (duty cycle)
     direction: 'forward' ou 'backward'
     """
+    FREQUENCY = 2000
+    PWM_PINS = [12, 13]  # Moteurs 1 à 4 18, 19
+    DIR_PINS = [  # 2 broches direction par moteur
+    (20, 21),  # Moteur 1
+    (16, 26),  # Moteur 2
+    #(19, 17),  # Moteur 3
+    #(4, 25)    # Moteur 4
+    ]
 
     dir1, dir2 = DIR_PINS[motor_index]
-
+    GPIO.PWM(PWM_PINS(motor_index), FREQUENCY).ChangeDutyCycle(speed)
     if direction == 'forward':
         GPIO.output(dir1, GPIO.HIGH)
         GPIO.output(dir2, GPIO.LOW)
@@ -50,7 +58,7 @@ def set_motor(motor_index, speed, direction):
         GPIO.output(dir1, GPIO.LOW)
         GPIO.output(dir2, GPIO.LOW)
 
-    pwms[motor_index].ChangeDutyCycle(speed)
+    
 
 # try:
 #     while True:
