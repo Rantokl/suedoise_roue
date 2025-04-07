@@ -47,7 +47,7 @@ def set_motor(motor_index, speed, direction):
     ]
 
     dir1, dir2 = DIR_PINS[motor_index]
-    GPIO.PWM(PWM_PINS(motor_index), FREQUENCY).ChangeDutyCycle(speed)
+    GPIO.PWM(PWM_PINS[motor_index], FREQUENCY).ChangeDutyCycle(speed)
     if direction == 'forward':
         GPIO.output(dir1, GPIO.HIGH)
         GPIO.output(dir2, GPIO.LOW)
