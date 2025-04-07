@@ -36,7 +36,7 @@ def receive_message():
 
     return jsonify({"status": "ok", "message": message})
 
-def run_motors():
+def run_motors(axis, value):
     while True:
         if axis == 'x':
             motors.set_motor(1,value,'forward')
@@ -48,7 +48,7 @@ def run_motors():
 if __name__ == '__main__':
     try:
         thread = threading.Thread(target=update_distances)
-        thread = threading.Thread(target=run_motors)
+        thread = threading.Thread(target=run_motors(axis,value))
         thread.daemon = True
         thread.start()
         app.run(host='0.0.0.0', port=8089, debug=True)
