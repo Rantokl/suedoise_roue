@@ -11,7 +11,7 @@ DIR_PINS = [  # 2 broches direction par moteur
 ]
 
 
-FREQUENCY = 2000  # en Hz
+FREQUENCY = 4000  # en Hz
 
 # Initialisation GPIO
 GPIO.setmode(GPIO.BCM)
@@ -29,7 +29,7 @@ pwms = [GPIO.PWM(pin, FREQUENCY) for pin in PWM_PINS]
 
 # Démarrer les PWM
 for pwm in pwms:
-    pwm.start(0)
+    pwm.start(70)
 
 def set_motor(motor_index, speed, direction):
     """
@@ -37,7 +37,7 @@ def set_motor(motor_index, speed, direction):
     speed: 0 à 100 (duty cycle)
     direction: 'forward' ou 'backward'
     """
-    FREQUENCY = 2000
+    FREQUENCY = 4000
     PWM_PINS = [12, 13]  # Moteurs 1 à 4 18, 19
     DIR_PINS = [  # 2 broches direction par moteur
     (20, 21),  # Moteur 1
@@ -47,7 +47,7 @@ def set_motor(motor_index, speed, direction):
     ]
 
     dir1, dir2 = DIR_PINS[motor_index]
-    GPIO.PWM(PWM_PINS[motor_index], FREQUENCY).ChangeDutyCycle(speed)
+    #GPIO.PWM(PWM_PINS[motor_index], FREQUENCY).ChangeDutyCycle(speed)
     if direction == 'forward':
         GPIO.output(dir1, GPIO.HIGH)
         GPIO.output(dir2, GPIO.LOW)

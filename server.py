@@ -31,7 +31,7 @@ def receive_message():
     message = data.get('message', {})
     axis = message.get('axis')
     value = int(message.get('value'))
-    print(f"Message reçu depuis AJAX : {message}")
+    print(f"Message reçu depuis AJAX : {axis} {value}")
     if axis == 'x':
         motors.set_motor(0,value,'forward')
         motors.set_motor(1,value,'backward')
