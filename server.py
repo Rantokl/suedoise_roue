@@ -29,31 +29,20 @@ def get_distances():
 def receive_message():
     data = request.get_json()
     message = data.get('message', {})
-    global axis, value 
     axis = message.get('axis')
     value = int(message.get('value'))
     print(f"Message reçu depuis AJAX : {message}")
-    global motor_thread, motor_thread_active
-
-    if motor_thread_active:
-        return jsonify({'status': 'Thread already running'}), 400
-    else :
-        motor_thread_active = True
-        motor_thread = threading.Thread(target=run_motors, args=(axis, value))
-        motor_thread.daemon = True
-        motor_thread.start()
+    if axis == 'x':
+            motors.set_motor(1,value,'forward')
+            motors.set_motor(2,value,'forward')
+    elif axis == 'y':
+        motors.set_motor(1,value,'backward')
+        motors.set_motor(1,value,'backward') 
 
     return jsonify({"status": "ok", "message": message})
 
-def run_motors(axis, value):
-    while True:
-        print(value,'\n')
-        if axis == 'x':
-            motors.set_motor(1,value,'forward')
-            motors.set_motor(2,value,'forward')
-        elif axis == 'y':
-            motors.set_motor(1,value,'backward')
-            motors.set_motor(1,value,'backward')  
+
+         
 
 if __name__ == '__main__':
     try:
