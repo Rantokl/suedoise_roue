@@ -33,6 +33,15 @@ def receive_message():
     axis = message.get('axis')
     value = int(message.get('value'))
     print(f"Message reçu depuis AJAX : {message}")
+    global motor_thread, motor_thread_active
+
+    if motor_thread_active:
+        return jsonify({'status': 'Thread already running'}), 400
+    else :
+        motor_thread_active = True
+        motor_thread = threading.Thread(target=run_motors, args=(axis, value))
+        motor_thread.daemon = True
+        motor_thread.start()
 
     return jsonify({"status": "ok", "message": message})
 
@@ -48,7 +57,7 @@ def run_motors(axis, value):
 if __name__ == '__main__':
     try:
         thread = threading.Thread(target=update_distances)
-        thread = threading.Thread(target=run_motors, args=(axis,value))
+        #thread = threading.Thread(target=run_motors, args=(axis,value))
         thread.daemon = True
         thread.start()
         app.run(host='0.0.0.0', port=8089, debug=True)
