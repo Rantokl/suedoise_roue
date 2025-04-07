@@ -1,37 +1,29 @@
-import time
-from roboclaw import Roboclaw
+from serial import Serial
+from time import sleep
 
-#Linux comport name
-rc = Roboclaw("/dev/ttyACM0",115200)
+if __name__ == "__main__":
 
-rc.Open()
-address = 0x80
+    serial_port = "/dev/ttyS0"
+    baudrate = 38400
 
-while(1):
-	rc.ForwardM1(address,32)	#1/4 power forward
-	rc.BackwardM2(address,32)	#1/4 power backward
-	time.sleep(2)
-	
-	rc.BackwardM1(address,32)	#1/4 power backward
-	rc.ForwardM2(address,32)	#1/4 power forward
-	time.sleep(2)
-
-	rc.BackwardM1(address,0)	#Stopped
-	rc.ForwardM2(address,0)		#Stopped
-	time.sleep(2)
-
-	m1duty = 16
-	m2duty = -16
-	rc.ForwardBackwardM1(address,64+m1duty)	#1/4 power forward
-	rc.ForwardBackwardM2(address,64+m2duty)	#1/4 power backward
-	time.sleep(2)
-	
-	m1duty = -16
-	m2duty = 16
-	rc.ForwardBackwardM1(address,64+m1duty)	#1/4 power backward
-	rc.ForwardBackwardM2(address,64+m2duty)	#1/4 power forward
-	time.sleep(2)
-
-	rc.ForwardBackwardM1(address,64)	#Stopped
-	rc.ForwardBackwardM2(address,64)	#Stopped
-	time.sleep(2)
+    roboclaw = Serial(serial_port, baudrate, timeout=1)
+    
+    while True:
+    
+        roboclaw.write(chr(94))
+        sleep(5)
+        roboclaw.write(chr(64))
+        sleep(5)
+        roboclaw.write(chr(32))
+        sleep(5)
+        roboclaw.write(chr(64))
+        sleep(5)
+        
+        roboclaw.write(chr(223))
+        sleep(5)
+        roboclaw.write(chr(192))
+        sleep(5)
+        roboclaw.write(chr(160))
+        sleep(5)
+        roboclaw.write(chr(192))
+        sleep(5)
