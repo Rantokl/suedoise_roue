@@ -47,6 +47,7 @@ def receive_message():
 
 def run_motors(axis, value):
     while True:
+        print(value,'\n')
         if axis == 'x':
             motors.set_motor(1,value,'forward')
             motors.set_motor(2,value,'forward')
