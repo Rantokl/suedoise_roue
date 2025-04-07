@@ -46,7 +46,6 @@ def receive_message():
 
 if __name__ == '__main__':
     try:
-        motors.motors_set()
         thread = threading.Thread(target=update_distances)
         #thread = threading.Thread(target=run_motors, args=(axis,value))
         thread.daemon = True
