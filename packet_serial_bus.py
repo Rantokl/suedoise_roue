@@ -9,12 +9,20 @@ while True:
     
     for address in addresses:
         
-        roboclaw.ForwardM1(address,64)
-        roboclaw.BackwardM2(address,64)
+        roboclaw.ForwardM1(address,32)
+        roboclaw.ForwardM2(address,32)
         #roboclaw.ForwardM2(address,64)
         sleep(2)
         roboclaw.ForwardM1(address,0)
-        roboclaw.BackwardM2(address,0)
+        roboclaw.ForwardM2(address,0)
+        #roboclaw.ForwardM2(address,0)
+        sleep(2)
+        roboclaw.BackwardM1(address,32)
+        roboclaw.BackwardM2(address,32)
+        #roboclaw.ForwardM2(address,64)
+        sleep(2)
+        roboclaw.ForwardM1(address,0)
+        roboclaw.ForwardM2(address,0)
         #roboclaw.ForwardM2(address,0)
         sleep(2)
         
