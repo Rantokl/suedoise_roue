@@ -28,11 +28,11 @@ def tourner_gauche(vitesse):
     moteur12.BackwardM2(address,vitesse)
     moteur34.BackwardM1(address,vitesse)
 
-def tourner_droite(self,vitesse):
+def tourner_droite(vitesse):
     moteur12.BackwardM1(address,vitesse)
     moteur34.BackwardM2(address,vitesse)
 
-def stop(self):
+def stop():
     moteur12.ForwardM1(address,0)
     moteur34.ForwardM1(address,0)
 
@@ -40,7 +40,5 @@ def stop(self):
     moteur34.ForwardM2(address,0)
 
 
-marche_avant(32)
-sleep(5)
-stop()
+
     
