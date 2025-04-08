@@ -10,20 +10,20 @@ if __name__ == "__main__":
     
     while True:
     
-        roboclaw.write(0x94)
+        roboclaw.write(94)
         sleep(5)
-        roboclaw.write(0x64)
+        roboclaw.write(64)
         sleep(5)
         roboclaw.write(0x32)
         sleep(5)
-        roboclaw.write(0x64)
+        roboclaw.write(64)
         sleep(5)
         
-        roboclaw.write(0x223)
+        roboclaw.write(223)
         sleep(5)
-        roboclaw.write(0x192)
+        roboclaw.write(192)
         sleep(5)
-        roboclaw.write(0x160)
+        roboclaw.write(160)
         sleep(5)
-        roboclaw.write(0x192)
+        roboclaw.write(192)
         sleep(5)
