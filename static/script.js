@@ -20,14 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        const message = input.value.trim();
-        if (!message) return;
-
-        await sendData('/send',message)
-    });
+    
 
 const sliderX = document.getElementById('slider-x');
 const sliderY = document.getElementById('slider-y');
