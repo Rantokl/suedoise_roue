@@ -39,5 +39,8 @@ def stop(self):
     moteur12.ForwardM2(address,0)
     moteur34.ForwardM2(address,0)
 
-        
+
+marche_avant(32)
+sleep(5)
+stop()
     
