@@ -10,7 +10,7 @@ if __name__ == "__main__":
     
     while True:
     
-        roboclaw.write(94)
+        roboclaw.write(chr(94))
         sleep(5)
         roboclaw.write(64)
         sleep(5)
