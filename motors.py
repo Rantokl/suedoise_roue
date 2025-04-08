@@ -10,9 +10,11 @@ moteur34.Open()
 
 def marche_avant(vitesse):
     moteur12.ForwardM1(address,vitesse) 
-    moteur34.ForwardM2(address,vitesse)
-    moteur34.ForwardM1(address,vitesse)
     moteur12.ForwardM2(address,vitesse)
+    moteur34.ForwardM1(address,vitesse)
+    moteur34.ForwardM2(address,vitesse)
+    
+    
 
 
 def marche_arriere(vitesse):
