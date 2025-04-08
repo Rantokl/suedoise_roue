@@ -27,12 +27,32 @@ const sliderY = document.getElementById('slider-y');
 const valueX = document.getElementById('value-x');
 const valueY = document.getElementById('value-y');
 
-sliderX.addEventListener('input', async (e) => {
-    valueX.textContent = sliderX.value;
-    // tu peux envoyer la valeur ici si besoin
-    const data = { axis: 'x', value: sliderX.value };
-    await sendData('/send', data);
-});
+
+async function move(direction) {
+    let data = {};
+
+    switch (direction) {
+        case 'up':
+            data = { axis: 'move', value: 'avant' };
+            break;
+        case 'down':
+            data = { axis: 'move', value: 'arriere' };
+            break;
+        case 'left':
+            data = { axis: 'move', value: 'gauche' };
+            break;
+        case 'right':
+            data = { axis: 'move', value: 'droite' };
+            break;
+        case 'stop':
+            data = { axis: 'move', value: 'stop' };
+            break;
+        default:
+            return;
+    }
+
+    await sendData('/direction', data);
+}
 
 sliderY.addEventListener('input', async (e) => {
     //Vérification
@@ -53,8 +73,21 @@ async function fetchDistances() {
     }
 }
 
+
 // Rafraîchit toutes les 1 sec
 setInterval(fetchDistances, 1000);
+
+async function fetchSpeed() {
+    try {
+        valueY.textContent = sliderY.value;
+        const data = { axis: 'y', value: sliderY.value };
+        await sendData('/send', data); 
+    }
+    catch (err) {
+        console.error("Erreur de récupération :", err);
+    }
+}
+setInterval(fetchSpeed, 1000);
 
 });
 

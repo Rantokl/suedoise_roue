@@ -1,82 +1,44 @@
-import RPi.GPIO as GPIO
-import time
+from roboclaw_3 import Roboclaw
+from time import sleep
 
-# Configuration des broches PWM pour les moteurs
-PWM_PINS = [12, 13]  # Moteurs 1 à 4 18, 19
-DIR_PINS = [  # 2 broches direction par moteur
-    (20, 21),  # Moteur 1
-    (16, 26),  # Moteur 2
-    #(19, 17),  # Moteur 3
-    #(4, 25)    # Moteur 4
-]
+class MotorController:
+    def __init__(self):
+        self.moteur12 = Roboclaw("/dev/ttyACM0", 38400)
+        self.moteur34 = Roboclaw("/dev/ttyS0", 38400)
+        self.address = 0x80
+        self.moteur12.Open()
+        self.moteur34.Open()
+
+    def marche_avant(self,vitesse):
+        self.moteur12.ForwardM1(self.address,vitesse)
+        self.moteur34.ForwardM1(self.address,vitesse)
+
+        self.moteur12.ForwardM2(self.address,vitesse)
+        self.moteur34.ForwardM2(self.address,vitesse)
+  
+
+    def marche_arriere(self,vitesse):
+        self.moteur12.BackwardM1(self.address,vitesse)
+        self.moteur34.BackwardM1(self.address,vitesse)
+
+        self.moteur12.BackwardM2(self.address,vitesse)
+        self.moteur34.BackwardM2(self.address,vitesse)
 
 
-FREQUENCY = 1000  # en Hz
+    def tourner_gauche(self,vitesse):
+        self.moteur12.BackwardM2(self.address,vitesse)
+        self.moteur34.BackwardM1(self.address,vitesse)
 
-# Initialisation GPIO
-GPIO.setmode(GPIO.BCM)
+    def tourner_droite(self,vitesse):
+        self.moteur12.BackwardM1(self.address,vitesse)
+        self.moteur34.BackwardM2(self.address,vitesse)
 
-# Configuration PWM et direction
-for pin in PWM_PINS:
-    GPIO.setup(pin, GPIO.OUT)
+    def stop(self):
+        self.moteur12.ForwardM1(self.address,0)
+        self.moteur34.ForwardM1(self.address,0)
 
-for dir1, dir2 in DIR_PINS:
-    GPIO.setup(dir1, GPIO.OUT)
-    GPIO.setup(dir2, GPIO.OUT)
+        self.moteur12.ForwardM2(self.address,0)
+        self.moteur34.ForwardM2(self.address,0)
 
-
-pwms = [GPIO.PWM(pin, FREQUENCY) for pin in PWM_PINS]
-
-# Démarrer les PWM
-for pwm in pwms:
-    pwm.start(10)
-
-def set_motor(motor_index, speed, direction):
-    global pwms
-    FREQUENCY = 1000
-    PWM_PINS = [12, 13]  # Moteurs 1 à 4 18, 19
-    DIR_PINS = [  # 2 broches direction par moteur
-    (20, 21),  # Moteur 1
-    (16, 26),  # Moteur 2
-    #(19, 17),  # Moteur 3
-    #(4, 25)    # Moteur 4
-    ]
-
-    dir1, dir2 = DIR_PINS[motor_index]
-    pwms[motor_index].ChangeDutyCycle(speed)
-    if direction == 'forward':
-        GPIO.output(dir1, GPIO.HIGH)
-        GPIO.output(dir2, GPIO.LOW)
-    elif direction == 'backward':
-        GPIO.output(dir1, GPIO.LOW)
-        GPIO.output(dir2, GPIO.HIGH)
-    else:
-        GPIO.output(dir1, GPIO.LOW)
-        GPIO.output(dir2, GPIO.LOW)
-
+        
     
-
-# try:
-#     while True:
-#         print("Tous les moteurs en avant")
-#         for i in range(2):
-#             set_motor(i, 70, 'forward')  # 70% de vitesse
-#         time.sleep(5)
-
-#         print("Tous les moteurs en arrière")
-#         for i in range(2):
-#             set_motor(i, 50, 'backward')  # 50% de vitesse
-#         time.sleep(5)
-
-#         print("Arrêt")
-#         for i in range(2):
-#             set_motor(i, 0, 'stop')
-#         time.sleep(5)
-
-# except KeyboardInterrupt:
-#     print("Arrêt du programme")
-
-# finally:
-#     for pwm in pwms:
-#         pwm.stop()
-#     GPIO.cleanup()
