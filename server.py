@@ -41,7 +41,7 @@ def receive_message():
 
     return jsonify({"status": "ok", "message": message})
 
-@app.route('/direction', method=['POST'])
+@app.route('/direction', methods=['POST'])
 def MarcheAvant():
     global speed
     data = request.get_json()
