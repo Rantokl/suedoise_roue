@@ -13,9 +13,9 @@ rc.Open()
 address = 0x80
 
 
-for i in range(0,32):
-    rc.ForwardM1(address,i*2)
-    time.sleep(1)	#1/4 power forward
+for i in range(0,8):
+    rc.ForwardM1(address,i*4)
+    time.sleep(0.5)	#1/4 power forward
 	# rc.BackwardM2(address,64)
 	# print("Backward")	#1/4 power backward
 	
