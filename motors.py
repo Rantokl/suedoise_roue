@@ -36,10 +36,11 @@ def tourner_droite(vitesse):
     moteur34.ForwardM1(address,int(vitesse/2))
 
 def stop():
+    moteur34.ForwardM2(address,0)
     moteur12.ForwardM1(address,0)
     moteur12.ForwardM2(address,0)
     moteur34.ForwardM1(address,0)
-    moteur34.ForwardM2(address,0)
+    
 
 
 
