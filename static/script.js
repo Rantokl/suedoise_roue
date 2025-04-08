@@ -54,12 +54,12 @@ async function move(direction) {
     await sendData('/direction', data);
 }
 
-sliderY.addEventListener('input', async (e) => {
-    //Vérification
-    valueY.textContent = sliderY.value;
-    const data = { axis: 'y', value: sliderY.value };
-    await sendData('/send', data);  // On envoie un objet, pas juste la valeur
-});
+// sliderY.addEventListener('input', async (e) => {
+//     //Vérification
+//     valueY.textContent = sliderY.value;
+//     const data = { axis: 'y', value: sliderY.value };
+//     await sendData('/send', data);  // On envoie un objet, pas juste la valeur
+// });
 
 async function fetchDistances() {
     try {
