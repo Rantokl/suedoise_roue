@@ -127,3 +127,32 @@ progress {
     height: 20px;
     margin-top: 10px;
 }
+
+
+.controls {
+    display: grid;
+    grid-template-columns: repeat(3, 60px);
+    grid-template-rows: repeat(3, 60px);
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .controls button {
+    width: 60px;
+    height: 60px;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #ddd;
+    border: 2px solid #888;
+    border-radius: 10px;
+    transition: background-color 0.2s;
+  }
+
+  .controls button:hover {
+    background-color: #bbb;
+  }
+
+  .empty {
+    visibility: hidden;
+  }
