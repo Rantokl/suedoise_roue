@@ -34,10 +34,7 @@ def receive_message():
     #print(f"Message reçu depuis AJAX : {axis} {value}")
     global speed
     speed = value
-    if axis=='x':
-        motor.tourner_doite(value)
-    if axis=='y':
-        motor.tourner_gauche(value)
+    
 
     return jsonify({"status": "ok", "message": message})
 

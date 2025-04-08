@@ -1,31 +1,20 @@
 from roboclaw_3 import Roboclaw
 from time import sleep
 
-address = 0x80
-roboclaw = Roboclaw("/dev/ttyACM0", 38400)
-roboclaw.Open()
+from motors import MotorController
 
-while True:
-    
-    
-        
-    roboclaw.ForwardM1(address,32)
-    roboclaw.ForwardM2(address,32)
-    #roboclaw.ForwardM2(address,64)
-    sleep(2)
-    roboclaw.ForwardM1(address,0)
-    roboclaw.ForwardM2(address,0)
-    #roboclaw.ForwardM2(address,0)
-    sleep(2)
-    roboclaw.BackwardM1(address,32)
-    roboclaw.BackwardM2(address,32)
-    #roboclaw.ForwardM2(address,64)
-    sleep(2)
-    roboclaw.ForwardM1(address,0)
-    roboclaw.ForwardM2(address,0)
-    #roboclaw.ForwardM2(address,0)
-    sleep(2)
-        
+motor = MotorController()
+
+motor.marche_avant(32)
+sleep(2)
+motor.tourner_droite(32)
+sleep(2)
+motor.tourner_gauche(32)
+sleep(2)
+motor.marche_arriere(32)
+sleep(2)
+motor.stop()
+sleep(2)
     
 
 
