@@ -9,10 +9,10 @@ class Roboclaw:
 	def __init__(self, comport, rate, timeout=0.01, retries=3):
 		self.comport = comport
 		self.rate = rate
-		self.timeout = timeout;
+		self.timeout = timeout
 		self._trystimeout = retries
-		self._crc = 0;
-		self._port = 0;
+		self._crc = 0
+		self._port = 0
 
 	#Command Enums
 	class Cmd():
