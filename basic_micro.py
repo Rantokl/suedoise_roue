@@ -10,7 +10,7 @@ if(rc):
 	print("Roboclaw connected")
 
 rc.Open()
-address = 0x80
+address = 0x81
 
 
 for i in range(0,8):
