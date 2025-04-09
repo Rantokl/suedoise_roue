@@ -38,15 +38,15 @@ def receive_message():
     # data = request.get_json()
     # message = data.get('message', {})
     # sens = message.get('value')
-    while sens == "avant":
+    if sens == "avant":
         marche_avant(speed)
-    while sens == "arriere":
+    if sens == "arriere":
         marche_arriere(speed)
-    while sens == "gauche":
+    if sens == "gauche":
         tourner_gauche(speed)
-    while sens == "doite":
+    if sens == "doite":
         tourner_droite(speed)
-    while sens == "stop":
+    if sens == "stop":
         stop()
 
     
