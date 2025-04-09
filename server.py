@@ -35,9 +35,9 @@ def receive_message():
     global speed
     speed = value
     print(f"Direction:{sens}, Vitesse: {speed}")
-    data = request.get_json()
-    message = data.get('message', {})
-    sens = message.get('value')
+    # data = request.get_json()
+    # message = data.get('message', {})
+    # sens = message.get('value')
     while sens == "avant":
         marche_avant(speed)
     while sens == "arriere":
