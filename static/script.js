@@ -73,7 +73,7 @@ let intervalId = null;
     // Bouton STOP (juste un clic)
     document.getElementById('btn-stop').addEventListener('click', async () => {
         stopSending();
-        await sendData('/send', { axis: 'move', value: 'stop' });
+        await sendData('/send', { axis: 'move', value: 'stop',speed:'0' });
     });
 
 sliderY.addEventListener('input', async (e) => {
