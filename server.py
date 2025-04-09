@@ -43,18 +43,18 @@ def receive_message():
         sleep(0.5)
         marche_avant(speed)
 
-    elif sens == "arriere":
-        stop()
-        sleep(0.5)
-        marche_arriere(speed)
-    elif sens == "gauche":
-        stop()
-        sleep(0.5)
-        tourner_gauche(speed)
     elif sens == "doite":
         stop()
         sleep(0.5)
         tourner_droite(speed)
+    elif sens == "gauche":
+        stop()
+        sleep(0.5)
+        tourner_gauche(speed)
+    elif sens == "arriere":
+        stop()
+        sleep(0.5)
+        marche_arriere(speed)
     elif sens == "stop":
         stop()
         sleep(0.5)
