@@ -42,10 +42,11 @@ let intervalId = null;
         intervalId = setInterval(sendCommand, 200); // continue tant qu'on appuie
     }
 
-    function stopSending() {
+    async function stopSending() {
         if (intervalId) {
             clearInterval(intervalId);
             intervalId = null;
+            await sendData('/send', { axis: 'move', value: 'stop' });
         }
     }
 
