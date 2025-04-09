@@ -6,7 +6,7 @@ from motors import *
 
 app = Flask(__name__)
 
-motor= MotorController()
+
 distances = {"Gauche": 0, "Droite": 0, "Arrière": 0}
 speed = 0
 def update_distances():
@@ -29,19 +29,12 @@ def get_distances():
 def receive_message():
     data = request.get_json()
     message = data.get('message', {})
-    axis = message.get('value')
+    sens = message.get('value')
     value = int(message.get('speed'))
     #print(f"Message reçu depuis AJAX : {axis} {value}")
     global speed
     speed = value
-    print(f"Direction:{axis}, Vitesse: {speed}")
-    
-
-    return jsonify({"status": "ok", "message": message})
-
-@app.route('/direction', methods=['POST'])
-def MarcheAvant():
-    global speed
+    print(f"Direction:{sens}, Vitesse: {speed}")
     data = request.get_json()
     message = data.get('message', {})
     sens = message.get('value')
@@ -56,6 +49,27 @@ def MarcheAvant():
     while sens == "stop":
         stop()
 
+    
+
+    return jsonify({"status": "ok", "message": message})
+
+# @app.route('/direction', methods=['POST'])
+# def MarcheAvant():
+#     global speed
+#     data = request.get_json()
+#     message = data.get('message', {})
+#     sens = message.get('value')
+#     while sens == "avant":
+#         marche_avant(speed)
+#     while sens == "arriere":
+#         marche_arriere(speed)
+#     while sens == "gauche":
+#         tourner_gauche(speed)
+#     while sens == "doite":
+#         tourner_droite(speed)
+#     while sens == "stop":
+#         stop()
+
 
          
 
@@ -68,5 +82,5 @@ if __name__ == '__main__':
         app.run(host='0.0.0.0', port=8089, debug=True)
     except KeyboardInterrupt:
         print("Arrêt du serveur.")
-        stop()
-        sensors.cleanup()
+        # stop()
+        # sensors.cleanup()

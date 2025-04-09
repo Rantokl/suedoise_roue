@@ -28,21 +28,52 @@ const sliderY = document.getElementById('slider-y');
 const valueY = document.getElementById('value-y');
 
 
-async function moveWithSlider(direction) {
-    const speed = parseInt(sliderY.value); // récupère la vitesse actuelle
-    valueY.textContent = speed; // met à jour l'affichage (au cas où)
-    const data = { axis: 'move', value: direction, speed: speed };
-    await sendData('/send', data);
-}
+let intervalId = null;
 
-// Ajout des écouteurs sur chaque bouton
-document.getElementById('btn-up').addEventListener('click', () => moveWithSlider('avant'));
-document.getElementById('btn-down').addEventListener('click', () => moveWithSlider('arriere'));
-document.getElementById('btn-left').addEventListener('click', () => moveWithSlider('gauche'));
-document.getElementById('btn-right').addEventListener('click', () => moveWithSlider('droite'));
-document.getElementById('btn-stop').addEventListener('click', async () => {
-    await sendData('/send', { axis: 'move', value: 'stop' });
-});
+    function startSending(direction) {
+        const sendCommand = () => {
+            const speed = parseInt(sliderY.value);
+            valueY.textContent = speed;
+            const data = { axis: 'move', value: direction, speed: speed };
+            sendData('/send', data);
+        };
+
+        sendCommand(); // envoie immédiat
+        intervalId = setInterval(sendCommand, 200); // continue tant qu'on appuie
+    }
+
+    function stopSending() {
+        if (intervalId) {
+            clearInterval(intervalId);
+            intervalId = null;
+        }
+    }
+
+    // Ajoute les listeners sur chaque bouton
+    function setupHoldButton(buttonId, direction) {
+        const btn = document.getElementById(buttonId);
+        btn.addEventListener('mousedown', () => startSending(direction));
+        btn.addEventListener('mouseup', stopSending);
+        btn.addEventListener('mouseleave', stopSending);
+
+        // Pour mobile (touch)
+        btn.addEventListener('touchstart', (e) => {
+            e.preventDefault(); // empêche le scroll
+            startSending(direction);
+        }, { passive: false });
+        btn.addEventListener('touchend', stopSending);
+    }
+
+    setupHoldButton('btn-up', 'avant');
+    setupHoldButton('btn-down', 'arriere');
+    setupHoldButton('btn-left', 'gauche');
+    setupHoldButton('btn-right', 'droite');
+
+    // Bouton STOP (juste un clic)
+    document.getElementById('btn-stop').addEventListener('click', async () => {
+        stopSending();
+        await sendData('/send', { axis: 'move', value: 'stop' });
+    });
 
 sliderY.addEventListener('input', async (e) => {
     //Vérification
