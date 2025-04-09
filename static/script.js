@@ -32,7 +32,7 @@ let intervalId = null;
 
     function startSending(direction) {
         const sendCommand = () => {
-            const speed = parseInt(sliderY.value);
+            const speed = sliderY.value;
             valueY.textContent = speed;
             const data = { axis: 'move', value: direction, speed: speed };
             sendData('/send', data);
