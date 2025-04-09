@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, jsonify
 import threading
 import time
 import sensors
-from motors import MotorController
+from motors import *
 
 app = Flask(__name__)
 
@@ -29,11 +29,12 @@ def get_distances():
 def receive_message():
     data = request.get_json()
     message = data.get('message', {})
-    axis = message.get('axis')
-    value = int(message.get('value'))
+    axis = message.get('value')
+    value = int(message.get('speed'))
     #print(f"Message reçu depuis AJAX : {axis} {value}")
     global speed
     speed = value
+    print(f"Direction:{axis}, Vitesse: {speed}")
     
 
     return jsonify({"status": "ok", "message": message})
@@ -45,15 +46,15 @@ def MarcheAvant():
     message = data.get('message', {})
     sens = message.get('value')
     while sens == "avant":
-        motor.marche_avant(speed)
+        marche_avant(speed)
     while sens == "arriere":
-        motor.marche_arriere(speed)
+        marche_arriere(speed)
     while sens == "gauche":
-        motor.tourner_gauche(speed)
+        tourner_gauche(speed)
     while sens == "doite":
-        motor.tourner_droite(speed)
+        tourner_droite(speed)
     while sens == "stop":
-        motor.stop()
+        stop()
 
 
          
@@ -67,5 +68,5 @@ if __name__ == '__main__':
         app.run(host='0.0.0.0', port=8089, debug=True)
     except KeyboardInterrupt:
         print("Arrêt du serveur.")
-        motor.stop()
+        stop()
         sensors.cleanup()

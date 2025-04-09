@@ -22,44 +22,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
     
 
-const sliderX = document.getElementById('slider-x');
+
 const sliderY = document.getElementById('slider-y');
-const valueX = document.getElementById('value-x');
+
 const valueY = document.getElementById('value-y');
 
 
-async function move(direction) {
-    let data = {};
-
-    switch (direction) {
-        case 'up':
-            data = { axis: 'move', value: 'avant' };
-            break;
-        case 'down':
-            data = { axis: 'move', value: 'arriere' };
-            break;
-        case 'left':
-            data = { axis: 'move', value: 'gauche' };
-            break;
-        case 'right':
-            data = { axis: 'move', value: 'droite' };
-            break;
-        case 'stop':
-            data = { axis: 'move', value: 'stop' };
-            break;
-        default:
-            return;
-    }
-
-    await sendData('/direction', data);
+async function moveWithSlider(direction) {
+    const speed = parseInt(sliderY.value); // récupère la vitesse actuelle
+    valueY.textContent = speed; // met à jour l'affichage (au cas où)
+    const data = { axis: 'move', value: direction, speed: speed };
+    await sendData('/send', data);
 }
 
-// sliderY.addEventListener('input', async (e) => {
-//     //Vérification
-//     valueY.textContent = sliderY.value;
-//     const data = { axis: 'y', value: sliderY.value };
-//     await sendData('/send', data);  // On envoie un objet, pas juste la valeur
-// });
+// Ajout des écouteurs sur chaque bouton
+document.getElementById('btn-up').addEventListener('click', () => moveWithSlider('avant'));
+document.getElementById('btn-down').addEventListener('click', () => moveWithSlider('arriere'));
+document.getElementById('btn-left').addEventListener('click', () => moveWithSlider('gauche'));
+document.getElementById('btn-right').addEventListener('click', () => moveWithSlider('droite'));
+document.getElementById('btn-stop').addEventListener('click', async () => {
+    await sendData('/send', { axis: 'move', value: 'stop' });
+});
+
+sliderY.addEventListener('input', async (e) => {
+    //Vérification
+    valueY.textContent = sliderY.value;
+    
+     // On envoie un objet, pas juste la valeur
+});
 
 async function fetchDistances() {
     try {
@@ -77,17 +67,7 @@ async function fetchDistances() {
 // Rafraîchit toutes les 1 sec
 setInterval(fetchDistances, 1000);
 
-async function fetchSpeed() {
-    try {
-        valueY.textContent = sliderY.value;
-        const data = { axis: 'y', value: sliderY.value };
-        await sendData('/send', data); 
-    }
-    catch (err) {
-        console.error("Erreur de récupération :", err);
-    }
-}
-setInterval(fetchSpeed, 1000);
+
 
 });
 
