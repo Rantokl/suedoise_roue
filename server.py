@@ -39,17 +39,26 @@ def receive_message():
     # message = data.get('message', {})
     # sens = message.get('value')
     if sens == "avant":
-        marche_avant(speed)
-    if sens == "arriere":
-        marche_arriere(speed)
-    if sens == "gauche":
-        tourner_gauche(speed)
-    if sens == "doite":
-        tourner_droite(speed)
-    if sens == "stop":
         stop()
+        sleep(0.5)
+        marche_avant(speed)
 
-    
+    elif sens == "arriere":
+        stop()
+        sleep(0.5)
+        marche_arriere(speed)
+    elif sens == "gauche":
+        stop()
+        sleep(0.5)
+        tourner_gauche(speed)
+    elif sens == "doite":
+        stop()
+        sleep(0.5)
+        tourner_droite(speed)
+    elif sens == "stop":
+        stop()
+        sleep(0.5)
+        stop()
 
     return jsonify({"status": "ok", "message": message})
 
