@@ -2,8 +2,8 @@ from roboclaw_3 import Roboclaw
 from time import sleep
 
 
-moteur12 = Roboclaw("/dev/ttyACM0", 115200)
-moteur34 = Roboclaw("/dev/ttyS0", 115200)
+moteur12 = Roboclaw("/dev/ttyACM0", 38400)
+moteur34 = Roboclaw("/dev/ttyS0", 38400)
 address = 0x80
 moteur12.Open()
 moteur34.Open()
