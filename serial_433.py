@@ -1,7 +1,8 @@
 from rpi_rf import RFDevice
+import RPi.GPIO as GPIO
 import time
 
-rfdevice = RFDevice(26)  # GPIO utilisé
+rfdevice = RFDevice(27)  # GPIO utilisé
 rfdevice.enable_rx()
 print("Récepteur actif")
 timestamp = None
