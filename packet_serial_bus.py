@@ -8,7 +8,7 @@ ser = serial.Serial('/dev/ttyACM0', 115200)
 
 while True :
     data = ser.readline().decode('utf-8').strip()
-    print("data {}".format(data))
+    #print("data {}".format(data))
     if data=="haut" :
         print("Avancer")
         #marche_avant(16)
@@ -20,7 +20,7 @@ while True :
         #tourner_gauche(16)
         print("Tourner a gauche")
         
-    elif data == "gauche":
+    elif data == "droite":
         #tourner_droite(16)
         print("Tourner a droite")
         
