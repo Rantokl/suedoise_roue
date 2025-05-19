@@ -11,23 +11,23 @@ while True :
     #print("data {}".format(data))
     if data=="haut" :
         print("Avancer")
-        #marche_avant(16)
+        marche_avant(16)
         
     elif data == "bas":
-        #marche_arriere(16)
+        marche_arriere(16)
         print("Reculer")
     elif data == "gauche":
-        #tourner_gauche(16)
+        tourner_gauche(16)
         print("Tourner a gauche")
         
     elif data == "droite":
-        #tourner_droite(16)
+        tourner_droite(16)
         print("Tourner a droite")
         
         
     if not data:
         print("Arreter")
-        #stop()
+        stop()
     
     
 
