@@ -25,7 +25,7 @@ while True :
         print("Tourner a droite")
         
         
-    else:
+    if not data:
         print("Arreter")
         #stop()
     
