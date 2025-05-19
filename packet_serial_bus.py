@@ -10,21 +10,24 @@ while True :
     data = ser.readline().decode('utf-8').strip()
     print("data {}".format(data))
     if data=="haut" :
-
-        marche_avant(16)
+        print("Avancer")
+        #marche_avant(16)
         
     elif data == "bas":
-        marche_arriere(16)
+        #marche_arriere(16)
+        print("Reculer")
+    elif data == "gauche":
+        #tourner_gauche(16)
+        print("Tourner a gauche")
         
     elif data == "gauche":
-        tourner_gauche(16)
-        
-    elif data == "gauche":
-        tourner_droite(16)
+        #tourner_droite(16)
+        print("Tourner a droite")
         
         
     else:
-        stop()
+        print("Arreter")
+        #stop()
     
     
 
