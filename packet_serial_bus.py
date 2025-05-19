@@ -8,6 +8,7 @@ ser = serial.Serial('/dev/ttyACM0', 115200)
 
 while True :
     data = ser.readline().decode('utf-8').strip()
+    print("data {}".format(data))
     if data=="haut" :
 
         marche_avant(16)
