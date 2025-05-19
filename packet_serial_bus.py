@@ -11,16 +11,16 @@ while True :
     if data=="haut" :
 
         marche_avant(16)
-        break
+        
     elif data == "bas":
         marche_arriere(16)
-        break
+        
     elif data == "gauche":
         tourner_gauche(16)
-        break
+        
     elif data == "gauche":
         tourner_droite(16)
-        break
+        
         
     else:
         stop()
