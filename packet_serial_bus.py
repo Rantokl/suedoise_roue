@@ -11,30 +11,18 @@ while True :
     while data=="haut" :
 
         marche_avant(16)
+        break
     while data == "bas":
         marche_arriere(16)
+        break
     while data == "gauche":
         tourner_gauche(16)
+        break
     while data == "gauche":
         tourner_droite(16)
-        # stop()
-        # sleep(0.5)
-        #tourner_droite(32)
-        #tourner_droite(64)
-
-        #stop()
-        #sleep(0.5)
-        #tourner_gauche(32)
-        #tourner_gauche(64)
-        # stop()
-        # #sleep(0.5)
-        # #marche_arriere(32)
-        # #marche_arriere(64)
-        # sleep(2)
-        # stop()
-
-    else :
-        stop()
+        break
+        
+    stop()
     
     
 
