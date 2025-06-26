@@ -21,13 +21,13 @@ def marche_arriere(vitesse):
     moteur12.ForwardM1(address,vitesse)
     
     
-def tourner_gauche(vitesse):
+def deplacer_gauche(vitesse):
     moteur12.BackwardM1(address,vitesse)
     moteur12.ForwardM2(address,vitesse)
     moteur34.BackwardM2(address,vitesse)
     moteur34.ForwardM1(address,vitesse)
 
-def tourner_droite(vitesse):
+def deplacer_droite(vitesse):
     moteur12.ForwardM1(address,vitesse) 
     moteur12.BackwardM2(address,vitesse)
     moteur34.ForwardM2(address,vitesse)
@@ -38,7 +38,18 @@ def stop():
     moteur12.ForwardM2(address,0)
     moteur34.ForwardM2(address,0)
     moteur34.ForwardM1(address,0)
-    
+
+def tourner_gauche(vitesse):
+    moteur12.BackwardM1(address,vitesse)
+    moteur12.ForwardM2(address,vitesse)
+    moteur34.ForwardM2(address,vitesse)
+    moteur34.BackwardM1(address,vitesse)
+
+def tourner_droite(vitesse):
+    moteur12.ForwardM1(address,vitesse) 
+    moteur12.BackwardM2(address,vitesse)
+    moteur34.BackwardM2(address,vitesse)
+    moteur34.ForwardM1(address,vitesse)
 
 
 
