@@ -1,6 +1,7 @@
 from roboclaw_3 import Roboclaw
 from time import sleep
 from motors import *
+from serial_test import get_direction
 import serial
 
 # Remplace ttyACM0 par le port correspondant si besoin
@@ -9,24 +10,25 @@ ser = serial.Serial('/dev/ttyACM0', 115200)
 while True :
     data = ser.readline().decode('utf-8').strip()
     #print("data {}".format(data))
-
-    if data=="haut" :
+    data_str = data.split(',')
+    dx,dy,direction = get_direction(int(data_str[0]), int(data_str[1]))
+    if direction=="haut" :
         print("Avancer")
-        marche_avant(16)
+        marche_avant(dy)
         
-    elif data == "bas":
-        marche_arriere(16)
+    elif direction == "bas":
+        marche_arriere(-1*dy)
         print("Reculer")
-    elif data == "gauche":
-        tourner_gauche(16)
+    elif direction == "gauche":
+        tourner_gauche(-1*dx)
         print("Tourner a gauche")
         
-    elif data == "droite":
-        tourner_droite(16)
+    elif direction == "droite":
+        tourner_droite(dx)
         print("Tourner a droite")
         
 
-    elif data == "arret":
+    elif direction == "repos":
     	print("Arreter")
     	stop()
     
