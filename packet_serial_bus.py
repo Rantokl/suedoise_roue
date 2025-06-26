@@ -15,28 +15,30 @@ while True :
         dx,dy,direction = get_direction(int(data_str[1]), int(data_str[2]))
         if direction=="haut" :
             print("Avancer")
-            marche_avant(dy)
+            #marche_avant(dy)
             
         elif direction == "bas":
-            marche_arriere(-1*dy)
+            #marche_arriere(-1*dy)
             print("Reculer")
         elif direction == "gauche":
-            deplacer_gauche(-1*dx)
+            #deplacer_gauche(-1*dx)
             print("Tourner a gauche")
             
         elif direction == "droite":
-            deplacer_droite(dx)
+            #deplacer_droite(dx)
             print("Tourner a droite")
             
         elif direction == "repos":
-            stop()
+            #stop()
             print("Arreter")
 
     if data_str[0]=="button":
         if data_str[1]=="droite":
-            tourner_droite(14)
+            #tourner_droite(14)
+            print("tourner droite")
         elif data_str[1]=="gauche":
-            tourner_gauche(14)
+            #tourner_gauche(14)
+            print("tourner gauche")
     
     
 
